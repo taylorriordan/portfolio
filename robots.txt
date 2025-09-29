@@ -1,0 +1,5 @@
+# Allow everything by default. To hide the whole site from search engines, replace with:
+# User-agent: *
+# Disallow: /
+User-agent: *
+Disallow:
