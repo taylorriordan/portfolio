@@ -1,0 +1,136 @@
+// Import Bootstrap functions and variables first
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables-dark";
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "border": map-merge(
+      map-get($utilities, "border"),
+      ( responsive: true )
+    ),
+    "border-width": map-merge(
+      map-get($utilities, "border-width"),
+      ( responsive: true )
+    ),
+    "border-bottom": map-merge(
+      map-get($utilities, "border-bottom"),
+      ( 
+        responsive: true,
+        values: (
+          null: $border-width solid $border-color,
+          0: 0,
+        )
+      )
+    )
+  )
+);
+
+// Custom gutter utilities
+$gutters: (
+  0: 0,
+  1: .25rem,
+  2: .5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem,
+  6: 5rem,   // 80px
+  7: 10rem,  // 160px
+  8: 12rem   // 192px
+);
+
+// Override Bootstrap variables here
+$primary: #ff6600;
+
+// Example: add a custom breakpoint
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1600px
+);
+
+// Custom container max-widths to match breakpoints
+$container-max-widths: (
+  sm: 540px,
+  md: 800px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  xxxl: 2000px // Set your desired width for xxxl
+);
+
+// Add viewport height utilities
+$utilities: map-merge(
+  $utilities,
+  (
+    "viewport-height": (
+      responsive: true,
+      property: height,
+      class: vh,
+      values: (
+        25: 25vh,
+        50: 50vh,
+        75: 75vh,
+        100: 100vh
+      )
+    ),
+    "min-viewport-height": (
+      responsive: true,
+      property: min-height,
+      class: min-vh,
+      values: (
+        25: 25vh,
+        50: 50vh,
+        75: 75vh,
+        100: 100vh
+      )
+    )
+  )
+);
+
+// Add negative margin utilities
+$utilities: map-merge(
+  $utilities,
+  (
+    "margin-start": map-merge(
+      map-get($utilities, "margin-start"),
+      (
+        responsive: true,
+        values: map-merge(
+          map-get(map-get($utilities, "margin-start"), "values"),
+          (
+            n1: -0.25rem,
+            n2: -0.5rem,
+            n3: -1rem,
+            n4: -1.5rem,
+            n5: -3rem
+          )
+        )
+      )
+    )
+  )
+);
+
+// Container padding override
+$container-padding-x: 1rem;
+$grid-gutter-width: 2rem;
+
+// Import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Container-specific override
+.container {
+  --bs-gutter-x: 1rem;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 1rem !important;  /* Override the calculated padding */
+  padding-left: 1rem !important;   /* Override the calculated padding */
+}
